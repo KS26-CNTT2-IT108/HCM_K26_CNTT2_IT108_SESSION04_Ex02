@@ -1,0 +1,29 @@
+SESSION04
+Bài 2 : Phân tích và xử lý lỗi thực thi trong Terminal
+
+Tên lớp: HCM K26 CNTT2
+Môn học: Nhập môn công nghệ thông tin
+Họ và tên: LƯƠNG THANH THƯ
+
+Phần 1:Phân tích.
+-Quy trình 3 bước:
++ Bước 1:Kiểm tra thư mục hiện tại (pwd): đang ở Desktop.
++ Bước 2:Liệt kê file (dir/ls): Desktop không có deploy.ps1.
++ Bước 3:Vị trí thật: file nằm ở Downloads\Project.
+
+Giải thích 2 lỗi:
+
+Gõ deploy.ps1 => PowerShell coi là tên lệnh, không phải file => CommandNotFoundException.
+Gõ .\deploy.ps1 => đúng cú pháp nhưng .\ là thư mục hiện tại (Desktop), nơi không có file => PathNotFound.
+
+Vì sao cần .\: PowerShell không tự chạy script ở thư mục hiện tại, tránh chạy nhầm file độc hại trùng tên với lệnh hợp lệ.
+
+Phần 2: Sửa lỗi
+powershell
+
+cd "$HOME\Downloads\Project"
+Get-ChildItem .\deploy.ps1
+.\deploy.ps1
+Di chuyển đến đúng thư mục chứa file (từ Desktop sang Downloads\Project) bằng cd (Set-Location).
+Kiểm tra file có tồn tại: Get-ChildItem .\deploy.ps1 (hoặc Test-Path .\deploy.ps1 trả về True).
+Thực thi script bằng tiền tố .\.
